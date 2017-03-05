@@ -1,3 +1,4 @@
-import * as api from './api';
+import * as api from './login';
+import * as api from './user';
 
-export default api;
+export default {login, user};
