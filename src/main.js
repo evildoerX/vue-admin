@@ -8,7 +8,7 @@ import store from './vuex/store'
 import Vuex from 'vuex'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import routes from './router/routes'
+import routes from './router'
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)
