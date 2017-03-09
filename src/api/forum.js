@@ -1,5 +1,10 @@
-import axios from 'axios';
+import { createApi, createNetWork } from './network'
 
-let base = 'oneitfarm.com';
+const DOMAIN = 'http://idg-preprod.tunnel.nibaguai.com';
+const BASE_URL = `${DOMAIN}/forum/main.php/json/`;
 
-export const getforumList = params => { return axios.get(`http://oneitfarm.com/forum/main.php/json/forum/all`, { params: params }); };
+export const getforumList = params => { 
+	return createApi('http://idg-preprod.tunnel.nibaguai.com/forum/main.php/json/forum/all',
+		params
+	)
+};

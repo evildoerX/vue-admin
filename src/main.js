@@ -10,10 +10,12 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import routes from './router'
 import 'font-awesome/css/font-awesome.min.css'
+import Qs from 'qs'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(Qs)
 
 NProgress.configure({ showSpinner: false });
 

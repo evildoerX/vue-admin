@@ -14,12 +14,12 @@
 </template>
 <script>
 	import { getforumList } from '../../api/forum.js';
-	import NProgress from 'nprogress'
+	import NProgress from 'nprogress';
 	export default {
 		data() {
 			return {
 				filters: {
-					appkey: 'm1ojbb3htzfubkfezgdw0e0jig07tfcf',
+					appkey: 'sbmi2c08nvu5ey3ni4pwxkfbkrfszthu',
 					channel:'0'
 				},
 				loading: false,
