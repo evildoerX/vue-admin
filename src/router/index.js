@@ -2,14 +2,17 @@ import Login from '../components/Login.vue'
 import NotFound from '../components/404.vue'
 import AppMain from '../components/layout/AppMain.vue'
 import Home from '../view/Home.vue'
-import Table from '../view/nav1/Table.vue'
-import Form from '../view/nav1/Form.vue'
-import Forum from '../view/nav1/Forum.vue'
-import user from '../view/nav1/user.vue'
-import Page4 from '../view/nav2/Page4.vue'
-import Page5 from '../view/nav2/Page5.vue'
-import Page6 from '../view/nav3/Page6.vue'
-import echarts from '../view/charts/echarts.vue'
+//Forum
+import Forum from '../view/Forum/Forum.vue'
+import Table from '../view/Forum/Table.vue'
+import Form from '../view/Forum/Form.vue'
+import TableReview from '../view/Forum/Table_review.vue'
+//User
+import User from '../view/User/User.vue'
+import User_Block from '../view/User/User_Block.vue'
+//data
+import Forum_Charts from '../view/charts/Forum_Charts.vue'
+import User_Charts from '../view/charts/User_Charts.vue'
 
 let routes = [
     {
@@ -37,42 +40,42 @@ let routes = [
     {
         path: '/',
         component: AppMain,
-        name: '导航一',
-        iconCls: 'el-icon-message',//图标样式class
-        children: [
-            { path: '/table', component: Table, name: 'Table' },
-            { path: '/form', component: Form, name: 'Form' },
-            { path: '/user', component: user, name: '列表' },
-            { path: '/forum', component: Forum, name: 'Forum' }
-        ]
-    },
-    {
-        path: '/',
-        component: AppMain,
-        name: '导航二',
-        iconCls: 'fa fa-id-card-o',
-        children: [
-            { path: '/page4', component: Page4, name: '页面4' },
-            { path: '/page5', component: Page5, name: '页面5' }
-        ]
-    },
-    {
-        path: '/',
-        component: AppMain,
         name: '',
         iconCls: 'fa fa-address-card',
         leaf: true,//只有一个节点
         children: [
-            { path: '/page6', component: Page6, name: '导航三' }
+            { path: '/forum', component: Forum, name: '板块管理', hidden: false }
         ]
     },
     {
         path: '/',
         component: AppMain,
-        name: 'Charts',
+        name: '帖子管理',
+        iconCls: 'el-icon-message',//图标样式class
+        children: [
+            { path: '/table', component: Table, name: '帖子管理' },
+            { path: '/table_review', component: TableReview, name: '帖子审核' }
+        ]
+    },
+    {
+        path: '/',
+        component: AppMain,
+        name: '用户管理',
+        iconCls: 'el-icon-message',//图标样式class
+        children: [
+            { path: '/user', component: User, name: '用户管理' },
+            { path: '/user_block', component: User_Block, name: '拉黑用户' }
+            
+        ]
+    },
+    {
+        path: '/',
+        component: AppMain,
+        name: '数据统计',
         iconCls: 'fa fa-bar-chart',
         children: [
-            { path: '/echarts', component: echarts, name: 'echarts' }
+            { path: '/forum_charts', component: Forum_Charts, name: '帖子统计' },
+            { path: '/user_charts', component: User_Charts, name: '用户统计' }
         ]
     },
     {

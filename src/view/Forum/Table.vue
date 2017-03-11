@@ -3,8 +3,13 @@
 		<!--工具条-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
 			<el-form :inline="true" :model="filters">
+				<el-cascader
+  					:options="options"
+					v-model="selectedOptions3">
+					</el-cascader>
+				</el-cascader>
 				<el-form-item>
-					<el-input v-model="filters.name" placeholder="姓名"></el-input>
+					<el-input v-model="filters.name" placeholder="帖子标题"></el-input>
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" v-on:click="getUsers">查询</el-button>
@@ -14,36 +19,65 @@
 				</el-form-item>
 			</el-form>
 		</el-col>
-
 		<!--列表-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
-			<el-table-column type="selection" width="55">
-			</el-table-column>
-			<el-table-column type="index" width="60">
-			</el-table-column>
-			<el-table-column prop="name" label="姓名" width="120" sortable>
-			</el-table-column>
-			<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
-			</el-table-column>
-			<el-table-column prop="age" label="年龄" width="100" sortable>
-			</el-table-column>
-			<el-table-column prop="birth" label="生日" width="120" sortable>
-			</el-table-column>
-			<el-table-column prop="addr" label="地址" min-width="180" sortable>
-			</el-table-column>
-			<el-table-column label="操作" width="150">
-				<template scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-
+		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+			<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+				<el-table-column type="expand">
+					<template scope="props">
+				        <el-form label-position="left" inline class="demo-table-expand" style="margin-left: 100px">
+				          <el-form-item label="帖子详情">
+				            <span>{{ props.row.disc }}</span>
+				          </el-form-item>
+				        </el-form>
+				    </template>
+	    		</el-table-column>
+				<el-table-column type="selection" width="55">
+				</el-table-column>
+				<el-table-column fixed prop="title" label="帖子标题" width="120" >
+				</el-table-column>
+				<el-table-column prop="auth" label="作者" width="120" >
+				</el-table-column>
+				<el-table-column prop="time" label="发帖时间" width="100">
+				</el-table-column>
+				<el-table-column prop="disc" label="帖子内容" width="180" >
+				</el-table-column>
+				<el-table-column prop="hfnum" label="回复数" width="120" >
+				</el-table-column>
+				<el-table-column prop="stage" label="状态" min-width="180" >
+				</el-table-column>
+				<el-table-column prop="jb" label="状态" min-width="180" >
+				</el-table-column>
+				<el-table-column prop="tj" label="状态" min-width="180" >
+				</el-table-column>
+				<el-table-column fixed="right" label="操作" width="400">
+					<template scope="scope">
+						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">加精</el-button>
+						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">置顶</el-button>
+						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">热帖</el-button>
+						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+						<el-button size="small" @click="handleEdit(scope.$index, scope.row)">拉黑</el-button>
+						<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+		</el-col>
 		<!--工具条-->
 		<el-col :span="24" class="toolbar">
 			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
 			</el-pagination>
+		</el-col>
+		<!-- 分页条 -->
+		<el-col :span="24" class="toolbar">
+		<el-pagination
+		      @size-change="handleSizeChange"
+		      @current-change="handleCurrentChange"
+		      :current-page="currentPage4"
+		      :page-sizes="[100, 200, 300, 400]"
+		      :page-size="100"
+		      layout="total, sizes, prev, pager, next, jumper"
+		      :total="400">
+		    </el-pagination>
 		</el-col>
 
 		<!--编辑界面-->
@@ -115,7 +149,87 @@
 				filters: {
 					name: ''
 				},
-				users: [],
+				options: [{
+		          value: 'zhinan',
+		          label: '板块1',
+		          children: [{
+		            value: 'shejiyuanze',
+		            label: '圈子1-1',
+		          }, {
+		            value: 'daohang',
+		            label: '圈子1-2',
+		          }]
+		        }, {
+		          value: 'zujian',
+		          label: '板块2',
+		          children: [{
+		            value: 'basic',
+		            label: '圈子2-1',
+		          }, {
+		            value: 'form',
+		            label: '圈子2-2',
+		          }, {
+		            value: 'data',
+		            label: '圈子2-3',
+		          }, {
+		            value: 'others',
+		            label: '圈子2-4',
+		          }]
+		        }, {
+		          value: 'ziyuan',
+		          label: '板块3',
+		          children: [{
+		            value: 'axure',
+		            label: '圈子3-1'
+		          }, {
+		            value: 'sketch',
+		            label: '圈子3-2'
+		          }, {
+		            value: 'jiaohu',
+		            label: '圈子3-3'
+		          }]
+		        }],
+		        selectedOptions3: ['zhinan', 'shejiyuanze'],
+		        props: {
+		          value: 'label',
+		          children: 'cities'
+		        },
+				currentPage4: 1,
+				users: [
+				{
+					id:'1',
+					title:'帖子标题1',	
+					time:'2017.03.11',
+					auth:'作者',
+					disc:'这是一个10个字的帖子简述',
+					hfnum:'2016',
+					stage:'已审核，审核人xxx',
+					jb:'举报次数',
+					tj:'推荐加精'
+				},
+				{
+					id:'2',
+					title:'帖子标题2',	
+					time:'2017.03.11',
+					auth:'作者',
+					disc:'这是一个10个字的帖子简述',
+					hfnum:'2016',
+					stage:'已审核，审核人xxx',
+					jb:'举报次数',
+					tj:'推荐加精'
+				},
+				{
+					id:'3',
+					title:'帖子标题3',	
+					time:'2017.03.11',
+					auth:'作者',
+					disc:'这是一个10个字的帖子简述',
+					hfnum:'2016',
+					stage:'已审核，审核人xxx',
+					jb:'举报次数',
+					tj:'推荐加精'
+				}
+				],
 				total: 0,
 				page: 1,
 				listLoading: false,
@@ -158,27 +272,43 @@
 		},
 		methods: {
 			//性别显示转换
+			handleItemChange(val) {
+		        console.log('active item:', val);
+		        setTimeout(_ => {
+		          if (val.indexOf('板块1') > -1 && !this.options1[0].cities.length) {
+		            this.options1[0].cities = [{
+		              label: '圈子 1-1',
+		              label: '圈子 1-2',
+		              label: '圈子 1-3'
+		            }];
+		          } else if (val.indexOf('板块2') > -1 && !this.options2[0].cities.length) {
+		            this.options2[0].cities = [{
+		              label: '圈子 2-1',
+		              label: '圈子 2-2',
+		              label: '圈子 2-3'
+		            }];
+		          } else if (val.indexOf('板块3') > -1 && !this.options3[0].cities.length) {
+		            this.options3[0].cities = [{
+		              label: '圈子 3-1',
+		              label: '圈子 3-2',
+		              label: '圈子 3-3'
+		            }];
+		          }
+		        }, 300);
+		      },
+			handleSizeChange(val) {
+        		console.log(`每页 ${val} 条`);
+      		},
+		    handleCurrentChange(val) {
+		      this.currentPage = val;
+		      console.log(`当前页: ${val}`);
+		    },
 			formatSex: function (row, column) {
 				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '未知';
 			},
 			handleCurrentChange(val) {
 				this.page = val;
 				this.getUsers();
-			},
-			//获取用户列表
-			getUsers() {
-				let para = {
-					page: this.page,
-					name: this.filters.name
-				};
-				this.listLoading = true;
-				NProgress.start();
-				getUserListPage(para).then((res) => {
-					this.total = res.data.total;
-					this.users = res.data.users;
-					this.listLoading = false;
-					NProgress.done();
-				});
 			},
 			//删除
 			handleDel: function (index, row) {
@@ -294,9 +424,6 @@
 
 				});
 			}
-		},
-		mounted() {
-			this.getUsers();
 		}
 	}
 
