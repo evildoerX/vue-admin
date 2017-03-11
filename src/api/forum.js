@@ -1,10 +1,15 @@
 import { createApi, createNetWork } from './network'
 
-const DOMAIN = 'http://idg-preprod.tunnel.nibaguai.com';
+const DOMAIN = `http://idg-preprod.tunnel.nibaguai.com`;
 const BASE_URL = `${DOMAIN}/forum/main.php/json/`;
 
 export const getforumList = params => { 
-	return createApi('http://idg-preprod.tunnel.nibaguai.com/forum/main.php/json/forum/all',
+	return createApi(`${BASE_URL}forum/all`,
+		params
+	)
+};
+export const getsubforumList = params => { 
+	return createApi(`${BASE_URL}subforum/all`,
 		params
 	)
 };
