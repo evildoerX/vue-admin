@@ -2,13 +2,13 @@
   <section class="chart-container">
     <el-row>
       <el-col :span="24">
-        <h3>发回帖详细数据</h3>
+        <h3>用户数据统计</h3>
         <el-date-picker v-model="value7" type="daterange" align="right" placeholder="选择日期范围" :picker-options="pickerOptions2">
         </el-date-picker>
         <div id="chartLine1" style="width:100%; height:400px;"></div>
       </el-col>
       <el-col :span="24">
-        <h3>圈子详细数据</h3>
+        <h3>用户与圈子统计</h3>
         <el-date-picker v-model="value2" align="right" type="date" placeholder="选择日期" :picker-options="pickerOptions1">
         </el-date-picker>
         <div id="chartBar1" style="width:100%; height:400px;"></div>
@@ -92,7 +92,7 @@
           }
         },
         legend: {
-          data: ['IP', '回帖数']
+          data: ['IP', 'PV']
         },
         grid: {
           left: '3%',
@@ -110,12 +110,12 @@
         },
         series: [
           {
-            name: '发帖数',
+            name: 'IP',
             type: 'bar',
             data: [18203, 23489, 29034, 104970, 131744, 630230]
           },
           {
-            name: '回帖数',
+            name: 'PV',
             type: 'bar',
             data: [19325, 23438, 31000, 121594, 134141, 681807]
           }
@@ -127,7 +127,7 @@
           trigger: 'axis'
         },
         legend: {
-          data: ['发帖数', '回帖数']
+          data: ['IP', 'PV']
         },
         grid: {
           left: '3%',
@@ -145,13 +145,13 @@
         },
         series: [
           {
-            name: '发帖数',
+            name: 'IP',
             type: 'line',
             stack: '总量',
             data: [120, 132, 101, 134, 90, 230, 210]
           },
           {
-            name: '回帖数',
+            name: 'PV',
             type: 'line',
             stack: '总量',
             data: [220, 182, 191, 234, 290, 330, 310]
