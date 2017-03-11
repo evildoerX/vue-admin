@@ -53,7 +53,7 @@ let routes = [
         name: '帖子管理',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/table', component: Table, name: '帖子管理' },
+            { path: '/table', component: Table, name: '帖子列表' },
             { path: '/table_review', component: TableReview, name: '帖子审核' }
         ]
     },
@@ -63,7 +63,7 @@ let routes = [
         name: '用户管理',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/user', component: User, name: '用户管理' },
+            { path: '/user', component: User, name: '用户列表' },
             { path: '/user_block', component: User_Block, name: '拉黑用户' }
             
         ]
